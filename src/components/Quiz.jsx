@@ -6,12 +6,6 @@ const Quiz = ({questlist}) => {
   const [index,setIndex] = useState(0);
   const [scores,setScr] = useState(0);
   const [msg,setMsg] = useState("All the Best");
-  const [indexes,setRandom] = useState([]);
-
-  //randomize seq 
-  const randomize = ()=>{
-      
-  }
 
   const nextQuest = ()=>{
     if(index < 9){

@@ -94,3 +94,21 @@ label.option:has(input[type="radio"]:checked) {
 input[type="radio"]{
   display: none;
 }
+
+@media screen and (max-width:760px) {
+  *{
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+  .quiz-container{
+    margin: 0;
+  }
+  .option-wrap{
+    margin: 0;
+    width: 100%;
+  }
+  .btn-next{
+    width: 50%;
+  }
+}
