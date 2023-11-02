@@ -57,21 +57,22 @@ label:hover{
   background-color: transparent;
   border: none;
   width: 100%;
-  padding: 7px;
+  padding: 10px;
   cursor: pointer;
+  font-size:15px;
+  background-color: rgb(206, 137, 8);
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 .btn-next{
     float: right;
-    margin:10% 25% 0 25%;
-    background-color: rgb(206, 137, 8);
+    margin:5% 25% 0 25%;
     width: 100px;
-    padding: 5px;
-    border-radius: 5px;
     color: white;
 }
 
-.btn-next:hover{
+.btn-next button:hover{
   background-color: rgb(233, 150, 56);;
 }
 

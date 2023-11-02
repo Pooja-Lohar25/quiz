@@ -2,30 +2,38 @@ import React from 'react'
 import { useState } from 'react'
 
 const Quiz = ({questlist}) => {
-  var randomnums = [];
+
+  //randomise seq 
   const genRandom = ()=>{
     return Math.floor(Math.random() * 10);
   }
-  randomnums.push(genRandom())
+  
+  const [index,setIndex] = useState(genRandom()); //stores currently visited index
+  const [visited,setVisited] = useState([index]) //stores all visited indexes
 
-  const [index,setIndex] = useState(randomnums[0]);
   const [scores,setScr] = useState(0);
   const [msg,setMsg] = useState("All the Best");
-  const [disp,setdisp] = useState(false);
+  const [disp,setdisp] = useState(false); //display scores
 
   const nextQuest = ()=>{
-    if(index < 9){
+    console.log(visited)
+    if(visited.length <=9){  
+      //check correct ans
       const options = document.getElementsByName('ans')
       Array.from(options).forEach(option =>{
         if(option.checked === true && option.value === questlist[index].answer ){
           setScr(scores+1) 
-
         }
       })
 
-      setIndex(index+1)
+      //set next random index
+      let ind = genRandom()
+      while(visited.includes(ind)){ ind = genRandom() }
+      setIndex(ind)
+      setVisited([...visited,ind])
     }
     else {
+      //at the end of quiz display scores
       setdisp(true)
       const result = document.getElementById("res");
       if(scores > 5){ 
@@ -83,6 +91,7 @@ const Quiz = ({questlist}) => {
         </div>
         <div className='btn-next'>
             <button onClick={nextQuest} > Next </button>
+            {disp ? <button onClick={()=>{window.location.reload()}} > Play again </button> : ""}
         </div>
     </div>
     </div>
