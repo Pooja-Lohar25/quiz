@@ -2,10 +2,16 @@ import React from 'react'
 import { useState } from 'react'
 
 const Quiz = ({questlist}) => {
+  var randomnums = [];
+  const genRandom = ()=>{
+    return Math.floor(Math.random() * 10);
+  }
+  randomnums.push(genRandom())
 
-  const [index,setIndex] = useState(0);
+  const [index,setIndex] = useState(randomnums[0]);
   const [scores,setScr] = useState(0);
   const [msg,setMsg] = useState("All the Best");
+  const [disp,setdisp] = useState(false);
 
   const nextQuest = ()=>{
     if(index < 9){
@@ -20,7 +26,7 @@ const Quiz = ({questlist}) => {
       setIndex(index+1)
     }
     else {
-
+      setdisp(true)
       const result = document.getElementById("res");
       if(scores > 5){ 
         result.style["background-color"] = "rgba(0, 128, 0, 0.866);";
@@ -42,7 +48,7 @@ const Quiz = ({questlist}) => {
   return (
     <div className='quiz-box'>
     <div className='res' id = "res">
-      <p className='scr'>Scores : {scores}</p>
+      <p className='scr'>Scores :  { disp ? scores : ""}</p>
       <p className='msg'>{msg}</p>
     </div>
     <div className='quiz-container'>
