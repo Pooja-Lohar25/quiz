@@ -37,17 +37,17 @@ const Quiz = ({questlist}) => {
       setdisp(true)
       const result = document.getElementById("res");
       if(scores > 5){ 
-        result.style["background-color"] = "rgba(0, 128, 0, 0.866);";
+        result.style.backgroundColor = "rgba(0, 128, 0, 0.866);";
         result.style.color = "white";
         setMsg("Great Job!!! Keep it up")
       }
       else if(scores < 5){
-        result.style["background-color"] = "rgb(156, 10, 10)";
+        result.style.backgroundColor = "rgba(156, 10, 10);";
         result.style.color = "white";
         setMsg("Sorry!! you did not pass")
       }
       else{
-        result.style["background-color"] = "orange";
+        result.style.backgroundColor = "orange";
         result.style.color = "white";
         setMsg("Not Bad!! You could do better...Happy learning")
       }
