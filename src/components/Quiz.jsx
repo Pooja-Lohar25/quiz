@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 const Quiz = ({questlist}) => {
 
+  
   //randomise seq 
   const genRandom = ()=>{
     return Math.floor(Math.random() * 10);
@@ -10,11 +11,15 @@ const Quiz = ({questlist}) => {
   
   const [index,setIndex] = useState(genRandom()); //stores currently visited index
   const [visited,setVisited] = useState([index]) //stores all visited indexes
-
+  
   const [scores,setScr] = useState(0);
   const [msg,setMsg] = useState("All the Best");
   const [disp,setdisp] = useState(false); //display scores
-
+  const [btndisabled,setDisabled] = useState(true)
+  
+  const enableNext = () =>{
+    setDisabled(false)
+  }
   const nextQuest = ()=>{
     console.log(visited)
     if(visited.length <=9){  
@@ -24,6 +29,7 @@ const Quiz = ({questlist}) => {
         if(option.checked === true && option.value === questlist[index].answer ){
           setScr(scores+1) 
         }
+        option.checked = false
       })
 
       //set next random index
@@ -31,6 +37,7 @@ const Quiz = ({questlist}) => {
       while(visited.includes(ind)){ ind = genRandom() }
       setIndex(ind)
       setVisited([...visited,ind])
+      setDisabled(true)
     }
     else {
       //at the end of quiz display scores
@@ -66,31 +73,31 @@ const Quiz = ({questlist}) => {
       <div className='option-container'>
             <div className='option-wrap' draggable="true"  >
                 <label className = "option" htmlFor="option1">
-                      <input type="radio" name='ans' id="option1"  value = {questlist[index].options[0]}/>
+                      <input type="radio" name='ans' id="option1" onClick={enableNext} value = {questlist[index].options[0]}/>
                       {questlist[index].options[0]}
                 </label>
             </div>
             <div className='option-wrap'  draggable="true" >
                 <label  className = "option" htmlFor="option2">
-                      <input type="radio" name='ans' id="option2" value={questlist[index].options[1]}/>
+                      <input type="radio" name='ans' id="option2"  onClick={enableNext} value={questlist[index].options[1]}/>
                       {questlist[index].options[1]}
                 </label>
             </div>
             <div className='option-wrap'  draggable="true" >
                 <label  className = "option" htmlFor="option3">
-                      <input type="radio" name='ans' id="option3" value={questlist[index].options[2]}/>
+                      <input type="radio" name='ans' id="option3" onClick={enableNext} value={questlist[index].options[2]}/>
                       {questlist[index].options[2]}
                 </label>
             </div>
             <div className='option-wrap'  draggable="true" >
                 <label  className = "option" htmlFor="option4">
-                      <input type="radio" name='ans'  id="option4" value={questlist[index].options[3]}/>
+                      <input type="radio" name='ans'  id="option4" onClick={enableNext} value={questlist[index].options[3]}/>
                       {questlist[index].options[3]}
                 </label>
             </div>
         </div>
         <div className='btn-next'>
-            <button onClick={nextQuest} > Next </button>
+            <button  id="sb-btn" onClick={nextQuest} disabled = {btndisabled}> Next </button>
             {disp ? <button onClick={()=>{window.location.reload()}} > Play again </button> : ""}
         </div>
     </div>
